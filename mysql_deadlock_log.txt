@@ -1,0 +1,167 @@
+"InnoDB"	""	"
+=====================================
+170426  8:26:26 INNODB MONITOR OUTPUT
+=====================================
+Per second averages calculated from the last 4 seconds
+----------
+SEMAPHORES
+----------
+OS WAIT ARRAY INFO: reservation count 3072746, signal count 1009135
+--Thread 9768 has waited at G:\mysql-5.1.53-winbuild\mysql-community-nt-5.1.53-build\storage\innobase\include\btr0btr.ic line 28 for 0.00 seconds the semaphore:
+S-lock on RW-latch at 43FD7A1C created in file .\buf\buf0buf.c line 550
+a writer (thread id 4740) has reserved it in mode  exclusive
+number of readers 0, waiters flag 1
+Last time read locked in file .\btr\btr0pcur.c line 249
+Last time write locked in file .\buf\buf0buf.c line 1847
+--Thread 2456 has waited at G:\mysql-5.1.53-winbuild\mysql-community-nt-5.1.53-build\storage\innobase\include\btr0btr.ic line 28 for 0.00 seconds the semaphore:
+S-lock on RW-latch at 44187F4C created in file .\buf\buf0buf.c line 550
+a writer (thread id 2456) has reserved it in mode  exclusive
+number of readers 0, waiters flag 1
+Last time read locked in file .\btr\btr0pcur.c line 249
+Last time write locked in file .\buf\buf0buf.c line 1847
+Mutex spin waits 0, rounds 63872021, OS waits 1623368
+RW-shared spins 1408946, OS waits 703919; RW-excl spins 7402, OS waits 5596
+------------------------
+LATEST DETECTED DEADLOCK
+------------------------
+170426  8:25:38
+*** (1) TRANSACTION:
+TRANSACTION 0 2012467131, ACTIVE 137 sec, OS thread id 2456 inserting
+mysql tables in use 1, locked 1
+LOCK WAIT 4 lock struct(s), heap size 320, 2 row lock(s), undo log entries 1
+MySQL thread id 504, query id 240615 localhost 127.0.0.1 root update
+insert into oauth_refresh_token (token_id, token, authentication) values ('362a422fd17003e77fb9bc3cf4a69379', x'ACED00057372004C6F72672E737072696E676672616D65776F726B2E73656375726974792E6F61757468322E636F6D6D6F6E2E44656661756C744578706972696E674F417574683252656672657368546F6B656E2FDF47639DD0C9B70200014C000A65787069726174696F6E7400104C6A6176612F7574696C2F446174653B787200446F72672E737072696E676672616D65776F726B2E73656375726974792E6F61757468322E636F6D6D6F6E2E44656661756C744F417574683252656672657368546F6B656E73E10E0A6354D45E0200014C000576616C75657400124C6A6176612F6C616E672F537472696E673B787074002466346261393737632D343531302D343833372D393966392D3836643333623237363539617372000E6A6176612E7574696C2E44617465686A81014B597419030000787077080000015C43DA585778', x'ACED0005737200416F72672E737072696E676672616D65776F726B2E73656375726974792E6F61757468322E70726F76696465722E4F417574683241757468656E7469636174696F6EBD400B02166252130200024C000D73746F7265645265717
+*** (1) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 0 page no 2043881 n bits 72 index `GEN_CLUST_INDEX` of table `umeox`.`oauth_refresh_token` trx id 0 2012467131 lock_mode X insert intention waiting
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+ 0: len 8; hex 73757072656d756d; asc supremum;;
+
+*** (2) TRANSACTION:
+TRANSACTION 0 2012449855, ACTIVE 435 sec, OS thread id 3956 fetching rows, thread declared inside InnoDB 369
+mysql tables in use 1, locked 1
+43092 lock struct(s), heap size 2092352, 177345 row lock(s), undo log entries 1
+MySQL thread id 215, query id 234302 localhost 127.0.0.1 root updating
+delete from oauth_access_token where token_id = '299c660228afe9ad7de81de102c5a1a8'		DefaultTokenServices.class tokenStore.removeAccessToken(existingAccessToken); 
+*** (2) HOLDS THE LOCK(S):
+RECORD LOCKS space id 0 page no 2043881 n bits 72 index `GEN_CLUST_INDEX` of table `umeox`.`oauth_refresh_token` trx id 0 2012449855 lock_mode X
+Record lock, heap no 1 PHYSICAL RECORD: n_fields 1; compact format; info bits 0
+ 0: len 8; hex 73757072656d756d; asc supremum;;
+
+Record lock, heap no 2 PHYSICAL RECORD: n_fields 6; compact format; info bits 0
+ 0: len 6; hex 00000015b516; asc       ;; 1: len 6; hex 000077f21ab9; asc   w   ;; 2: len 7; hex 80003000290110; asc   0 )  ;; 3: len 30; hex 616564623538376363306234666530346265316465353030363363646438; asc aedb587cc0b4fe04be1de50063cdd8;...(truncated); 4: len 30; hex aced00057372004c6f72672e737072696e676672616d65776f726b2e7365; asc     sr Lorg.springframework.se;...(truncated); 5: len 30; hex aced0005737200416f72672e737072696e676672616d65776f726b2e7365; asc     sr Aorg.springframework.se;...(truncated);
+
+Record lock, heap no 3 PHYSICAL RECORD: n_fields 6; compact format; info bits 0
+ 0: len 6; hex 00000015b600; asc       ;; 1: len 6; hex 000077f30c36; asc   w  6;; 2: len 7; hex 80003e001c0139; asc   >   9;; 3: len 30; hex 306332303136326361633137333233353336353137333739646532643133; asc 0c20162cac17323536517379de2d13;...(truncated); 4: len 30; hex aced00057372004c6f72672e737072696e676672616d65776f726b2e7365; asc     sr Lorg.springframework.se;...(truncated); 5: len 30; hex aced0005737200416f72672e737072696e676672616d65776f726b2e7365; asc     sr Aorg.springframework.se;...(truncated);
+
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 6; compact format; info bits 0
+ 0: len 6; hex 00000015b601; asc       ;; 1: len 6; hex 000077f31ee1; asc   w   ;; 2: len 7; hex 800020b8fa0110; asc        ;; 3: len 30; hex 666531636661633763303033636534356130363536636135626339326661; asc fe1cfac7c003ce45a0656ca5bc92fa;...(truncated); 4: len 30; hex aced00057372004c6f72672e737072696e676672616d65776f726b2e7365; asc     sr Lorg.springframework.se;...(truncated); 5: len 30; hex aced0005737200416f72672e737072696e676672616d65776f726b2e7365; asc     sr Aorg.springframework.se;...(truncated);
+
+Record lock, heap no 5 PHYSICAL RECORD: n_fields 6; compact format; info bits 0
+ 0: len 6; hex 00000015b602; asc       ;; 1: len 6; hex 000077f36948; asc   w iH;; 2: len 7; hex 800020b8df0139; asc       9;; 3: len 30; hex 333237653262656332653762346236383830333766326362613538343163; asc 327e2bec2e7b4b688037f2cba5841c;...(truncated); 4: len 30; hex aced00057372004c6f72672e737072696e676672616d65776f726b2e7365; asc     sr Lorg.springframework.se;...(truncated); 5: len 30; hex aced0005737200416f72672e737072696e676672616d65776f726b2e7365; asc     sr Aorg.springframework.se;...(truncated);
+
+*** (2) WAITING FOR THIS LOCK TO BE GRANTED:
+RECORD LOCKS space id 0 page no 2396383 n bits 72 index `PRIMARY` of table `umeox`.`oauth_access_token` trx id 0 2012449855 lock_mode X waiting
+Record lock, heap no 4 PHYSICAL RECORD: n_fields 9; compact format; info bits 0
+ 0: len 30; hex 643962656561333238663930336438643039613436313030383761616566; asc d9beea328f903d8d09a4610087aaef;...(truncated); 1: len 6; hex 000077f3cfbb; asc   w   ;; 2: len 7; hex 800005a5500110; asc     P  ;; 3: len 30; hex 373966323139353963366261396539303235663164316135306435646662; asc 79f21959c6ba9e9025f1d1a50d5dfb;...(truncated); 4: len 30; hex aced0005737200436f72672e737072696e676672616d65776f726b2e7365; asc     sr Corg.springframework.se;...(truncated); 5: len 21; hex 6a61696d65616c637524686f746d61696c2e636f6d; asc jaimealcu$hotmail.com;; 6: len 20; hex 7768657265636f6d5f6170695f616e64726f6964; asc wherecom_api_android;; 7: len 30; hex aced0005737200416f72672e737072696e676672616d65776f726b2e7365; asc     sr Aorg.springframework.se;...(truncated); 8: len 30; hex 333632613432326664313730303365373766623962633363663461363933; asc 362a422fd17003e77fb9bc3cf4a693;...(truncated);
+
+*** WE ROLL BACK TRANSACTION (1)
+------------
+TRANSACTIONS
+------------
+Trx id counter 0 2012479151
+Purge done for trx's n:o < 0 2012476968 undo n:o < 0 0
+History list length 306
+LIST OF TRANSACTIONS FOR EACH SESSION:
+---TRANSACTION 0 0, not started, OS thread id 16340
+MySQL thread id 560, query id 257771 14.28.138.240 root
+show engine innodb status
+---TRANSACTION 0 0, not started, OS thread id 15036
+MySQL thread id 558, query id 237036 14.28.138.240 root
+---TRANSACTION 0 0, not started, OS thread id 12816
+MySQL thread id 511, query id 222174 14.28.138.240 root
+---TRANSACTION 0 2012479149, not started, OS thread id 15140
+MySQL thread id 556, query id 257762 ip-172-31-30-88.eu-west-1.compute.internal 172.31.30.88 root
+---TRANSACTION 0 2012472710, not started, OS thread id 3244
+MySQL thread id 554, query id 237329 localhost 127.0.0.1 root
+---TRANSACTION 0 2012472011, not started, OS thread id 12356 
+MySQL thread id 4, query id 218550 localhost 127.0.0.1 root
+---TRANSACTION 0 2012468114, not started, OS thread id 2728
+MySQL thread id 2, query id 218539 localhost 127.0.0.1 root
+---TRANSACTION 0 2012479150, ACTIVE 0 sec, OS thread id 5448 starting index read, thread declared inside InnoDB 499
+mysql tables in use 2, locked 0
+MySQL thread id 544, query id 257770 localhost 127.0.0.1 root Copying to tmp table
+SELECT m.mobile, mr.is_admin, m.token, m.push_type, m.client_id FROM ux_monitor mr LEFT JOIN ux_member m ON mr.member_id = m.id WHERE mr.holder_id = 13031 ORDER BY token DESC
+Trx read view will not see trx with id >= 0 2012479151, sees < 0 2012476962
+---TRANSACTION 0 2012478971, ACTIVE 3 sec, OS thread id 9768 fetching rows, thread declared inside InnoDB 335
+mysql tables in use 1, locked 0
+MySQL thread id 209, query id 257211 localhost 127.0.0.1 root Sending data
+select token_id, authentication from oauth_access_token where token_id = '75db353391e35e7565e81bee728fd0bc'
+Trx read view will not see trx with id >= 0 2012478972, sees < 0 2012476962
+---TRANSACTION 0 2012478920, ACTIVE 4 sec, OS thread id 4740 fetching rows, thread declared inside InnoDB 335
+mysql tables in use 1, locked 0
+MySQL thread id 438, query id 256988 localhost 127.0.0.1 root Sending data
+select token_id, authentication from oauth_access_token where token_id = '1c49ba8a6e50a825e7ee915838853db5'
+Trx read view will not see trx with id >= 0 2012478921, sees < 0 2012476962
+---TRANSACTION 0 2012476962, ACTIVE 35 sec, OS thread id 2456 fetching rows, thread declared inside InnoDB 177
+mysql tables in use 1, locked 1
+5453 lock struct(s), heap size 273728, 23811 row lock(s)
+MySQL thread id 504, query id 250251 localhost 127.0.0.1 root updating
+delete from oauth_refresh_token where token_id = '634d76e64d14ed0607ef70c724dac0e0'
+Trx read view will not see trx with id >= 0 2012476963, sees < 0 2012476963
+--------
+FILE I/O
+--------
+I/O thread 0 state: wait Windows aio (insert buffer thread)
+I/O thread 1 state: wait Windows aio (log thread)
+I/O thread 2 state: wait Windows aio (read thread)
+I/O thread 3 state: wait Windows aio (write thread)
+Pending normal aio reads: 1, aio writes: 0,
+ ibuf aio reads: 0, log i/o's: 0, sync i/o's: 2
+Pending flushes (fsync) log: 0; buffer pool: 0
+329040 OS file reads, 23175 OS file writes, 19102 OS fsyncs
+339.17 reads/s, 16384 avg bytes/read, 18.00 writes/s, 15.75 fsyncs/s
+-------------------------------------
+INSERT BUFFER AND ADAPTIVE HASH INDEX
+-------------------------------------
+Ibuf: size 41, free list len 70, seg size 112,
+14724 inserts, 12994 merged recs, 1135 merges
+Hash table size 2847253, node heap has 666 buffer(s)
+118.72 hash searches/s, 195.20 non-hash searches/s
+---
+LOG
+---
+Log sequence number 40 1446246358
+Log flushed up to   40 1446246358
+Last checkpoint at  40 1444042289
+0 pending log writes, 0 pending chkp writes
+18842 log i/o's done, 15.25 log i/o's/second
+----------------------
+BUFFER POOL AND MEMORY
+----------------------
+Total memory allocated 785189814; in additional pool allocated 14385664
+Dictionary memory allocated 309080
+Buffer pool size   43904
+Free buffers       0
+Database pages     43222
+Modified db pages  513
+Pending reads 4
+Pending writes: LRU 0, flush list 0, single page 0
+Pages read 329027, created 394, written 4184
+341.66 reads/s, 0.25 creates/s, 2.50 writes/s
+Buffer pool hit rate 935 / 1000
+--------------
+ROW OPERATIONS
+--------------
+4 queries inside InnoDB, 0 queries in queue
+5 read views open inside InnoDB
+Main thread id 17472, state: sleeping
+Number of rows inserted 9714, updated 9998, deleted 164, read 63773903
+7.25 inserts/s, 8.25 updates/s, 0.00 deletes/s, 3095.23 reads/s
+----------------------------
+END OF INNODB MONITOR OUTPUT
+============================
+"
+
+
+				
+				
